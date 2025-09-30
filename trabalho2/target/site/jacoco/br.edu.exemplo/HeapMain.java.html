@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HeapMain.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">conta-bancaria</a> &gt; <a href="index.source.html" class="el_package">br.edu.exemplo</a> &gt; <span class="el_source">HeapMain.java</span></div><h1>HeapMain.java</h1><pre class="source lang-java linenums">package br.edu.exemplo;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+<span class="nc" id="L7">public class HeapMain {</span>
+    // Lê strings da entrada padrão, ordena e imprime.
+    public static void main(String[] args) {
+<span class="nc" id="L10">        System.out.println(&quot;Forneça as strings a serem postas em ordem.\nUma por linha.&quot;);</span>
+<span class="nc" id="L11">        System.out.println(&quot;Uma linha vazia encerra a leitura:&quot;);</span>
+
+<span class="nc" id="L13">        String[] a = HeapMain.readStrings();</span>
+<span class="nc" id="L14">        Heap.sort(a);</span>
+<span class="nc" id="L15">        System.out.println(Heap.show(a));</span>
+<span class="nc" id="L16">    }</span>
+
+    // Lê uma quantidade ilimitada de Strings; retorna um String[]
+    public static String[] readStrings() {
+<span class="fc" id="L20">        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));</span>
+<span class="fc" id="L21">        String[] array = new String[5];</span>
+<span class="fc" id="L22">        int itemsRead = 0;</span>
+        String oneLine;
+
+        try {
+<span class="fc bfc" id="L26" title="All 4 branches covered.">            while ((oneLine = in.readLine()) != null &amp;&amp; !oneLine.equals(&quot;&quot;)) {</span>
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">                if (itemsRead == array.length) {</span>
+<span class="nc" id="L28">                    array = resize(array, array.length * 2);</span>
+                }
+<span class="fc" id="L30">                array[itemsRead++] = oneLine;</span>
+            }
+<span class="nc" id="L32">        } catch (IOException e) {</span>
+<span class="nc" id="L33">            System.out.println(&quot;Unexpected IO Exception has shortened amount read&quot;);</span>
+<span class="fc" id="L34">        }</span>
+
+<span class="fc" id="L36">        return resize(array, itemsRead);</span>
+    }
+
+    public static String[] resize(String[] array, int newSize) {
+<span class="fc" id="L40">        String[] original = array;</span>
+<span class="fc" id="L41">        int numToCopy = Math.min(original.length, newSize);</span>
+
+<span class="fc" id="L43">        array = new String[newSize];</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        for (int i = 0; i &lt; numToCopy; i++) {</span>
+<span class="fc" id="L45">            array[i] = original[i];</span>
+        }
+<span class="fc" id="L47">        return array;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
